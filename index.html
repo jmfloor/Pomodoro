@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pomodoro</title>
+</head>
+
+<body>
+    <div class="flex-container center">
+        <div class="flex-box"><h1>Pomodoro</h1></div>
+    </div>  
+    <div class="flex-container center">
+        <div id="counter">25:00</div>
+    </div>  
+    <div id="buttongroup" class="flex-container center">
+        <div><button id="start">Start</button></div>
+
+        <div><button id="restart">Restart</button></div>
+    </div>
+</body>
+
+<style>
+    body {
+        background:grey;
+
+    }
+    #counter{
+        color:greenyellow;
+        padding: 20px;
+        font-size: 4rem;
+    }
+    .flex-container {
+       display: flex;
+       flex-direction: row;
+
+    }
+
+    .center{
+        justify-content: center;
+        align-content: center;
+    }
+
+    #buttongroup{
+        align-items:center;
+    }
+
+    button {
+        width: 80px;
+        height: 25px; 
+        color: aliceblue;
+        background: blueviolet;
+        border-radius: 5px;
+        border-style: hidden;  
+        margin: 5px;      
+    }
+    
+
+</style>
+
+<script>
+    const buttons = document.querySelectorAll('button');
+    const display = document.getElementById("counter");
+    var minutes = 25;
+    var seconds = 0;
+    var time = 25*60;
+
+    function updateTime() {
+        display.textContent = Math.trunc(time/60) + ":"+ (Math.trunc(time%60) < 10 ? "0" : "") + Math.trunc(time%60) ;
+        time--;
+    }
+
+    function startTimer() {
+        myVar = setInterval(updateTime, 1000);
+        this.textContent = "Pause";
+        document.getElementById("start").textContent = "Pause";
+    }
+
+    function pauseTimer() {
+        clearInterval(myVar);
+        document.getElementById("start").textContent = "Start";
+    }
+
+    function restartTimer() {
+        time = 25*60;
+        updateTime();
+    }
+
+    function runCommand(e) {
+        const action = this.textContent;
+        var text;
+
+        switch(action) {
+            case "Start": startTimer(e); break;
+            case "Pause": pauseTimer(); break;
+            case "Restart": restartTimer(); break;
+            default:
+        }
+
+        
+    }
+    buttons.forEach(button => button.addEventListener('click', runCommand));
+
+</script>
+
+
+</html>
