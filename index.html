@@ -21,17 +21,27 @@
 
 <style>
     body {
-        background:grey;
-
+        background:#1a535c;
     }
+
+   
+    h1, h2, p, div {
+        size: 20rem;
+        color: #F7FFF7;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    h1 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
     #counter{
-        color:greenyellow;
         padding: 20px;
         font-size: 4rem;
     }
     .flex-container {
        display: flex;
        flex-direction: row;
+       flex-wrap: wrap;
 
     }
 
@@ -45,13 +55,13 @@
     }
 
     button {
-        width: 80px;
-        height: 25px; 
-        color: aliceblue;
-        background: blueviolet;
-        border-radius: 5px;
+        
+        min-width: 10em;
+        background:#4ECDC4;
+        border-radius: 0px;
         border-style: hidden;  
-        margin: 5px;      
+        margin: 0.1em; 
+        padding:0.6em 1em;     
     }
     
 
@@ -60,12 +70,16 @@
 <script>
     const buttons = document.querySelectorAll('button');
     const display = document.getElementById("counter");
+    const title = document.getElementsByName("title")
     var minutes = 25;
     var seconds = 0;
     var time = 25*60;
+    var timeroutput;
 
     function updateTime() {
-        display.textContent = Math.trunc(time/60) + ":"+ (Math.trunc(time%60) < 10 ? "0" : "") + Math.trunc(time%60) ;
+        timeroutput = Math.trunc(time/60) + ":"+ (Math.trunc(time%60) < 10 ? "0" : "") + Math.trunc(time%60) ;
+         display.textContent = timeroutput;
+         document.title = timeroutput;
         time--;
     }
 
